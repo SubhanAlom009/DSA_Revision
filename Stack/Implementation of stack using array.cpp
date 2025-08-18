@@ -15,8 +15,11 @@ public:
 public:
     void push(int x)
     {
-        if (top > 10)
+        if (top >= 9)
+        {
             cout << "Stack overflow!";
+            return;
+        }
         top = top + 1;
         arr[top] = x;
     }
@@ -24,14 +27,20 @@ public:
     void pop()
     {
         if (top == -1)
+        {
             cout << "Stack underflow!";
+            return;
+        }
         top = top - 1;
     }
     // top or peek
     int peek()
     {
         if (top == -1)
+        {
             cout << "stack is empty";
+            return;
+        }
 
         return arr[top];
     }

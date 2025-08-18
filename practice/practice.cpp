@@ -6,57 +6,65 @@
 
 using namespace std;
 
-class stack
+class queue
 {
 public:
-    int top = -1;
-    int arr[10];
+    int front = -1;
+    int rear = -1;
+    int q[10];
 
 public:
-    void push(int x)
+    void enqueue(int x)
     {
-        if (top > 10)
-            cout << "Stack overflow!";
-        top = top + 1;
-        arr[top] = x;
+        if (rear >= 9)
+        {
+            cout << "Queue overflow!" << endl;
+            return;
+        }
+        rear++;
+        q[rear] = x;
     }
 
-    void pop()
+    void dequeue()
     {
-        if (top == -1)
-            cout << "Stack underflow!";
-        top = top - 1;
+        if (front > rear)
+        {
+            cout << "Queue underflow!" << endl;
+            return;
+        }
+        front++;
     }
-    // top or peek
+
     int peek()
     {
-        if (top == -1)
-            cout << "stack is empty";
-
-        return arr[top];
+        if (front > rear)
+            cout << "Queue is empty!" << endl;
+        return q[front];
     }
 
     int size()
     {
-        return top + 1;
+        if (front > rear)
+            return 0;
+        return rear - front + 1;
     }
 
     bool isEmpty()
     {
-        return top == -1;
+        return (front > rear);
     }
 };
 
 int main()
 {
-    stack st;
+    queue q;
 
-    st.push(10);
-    st.push(20);
-    st.push(30);
+    q.enqueue(10);
+    q.enqueue(20);
+    q.enqueue(30);
 
-    cout << "Top of the stack: " << st.peek() << endl;
-    st.pop();
-    cout << "Top after pop: " << st.peek() << endl;
-    cout << "Size of stack: " << st.size() << endl;
+    cout << "Top of the Queue: " << q.peek() << endl;
+    q.dequeue();
+    cout << "Top after dequeue: " << q.peek() << endl;
+    cout << "Size of Queue: " << q.size() << endl;
 }
