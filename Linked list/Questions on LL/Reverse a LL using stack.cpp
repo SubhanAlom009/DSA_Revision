@@ -15,18 +15,22 @@ public:
     }
 };
 
-node *reverseLLRecursion(node *head)
+void reverseLL(node *head)
 {
-    if (head == nullptr || head->next == nullptr)
-        return head;
-
-    node *newHead = reverseLLRecursion(head->next);
-
-    // fix the links
-    head->next->next = head;
-    head->next = nullptr;
-
-    return newHead;
+    stack<int> st;
+    node *temp = head;
+    while (temp != nullptr)
+    {
+        st.push(temp->data);
+        temp = temp->next;
+    }
+    node *temp2 = head;
+    while (temp2 != nullptr)
+    {
+        temp2->data = st.top();
+        st.pop();
+        temp2 = temp2->next;
+    }
 }
 
 void display(node *head)
@@ -50,6 +54,6 @@ int main()
     node *nd3 = new node(20);
     nd2->next = nd3;
 
-    head = reverseLLRecursion(head);
+    reverseLL(head);
     display(head);
 }
